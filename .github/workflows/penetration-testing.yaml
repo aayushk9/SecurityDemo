@@ -1,0 +1,29 @@
+name: Nettacker Penetration Testing CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  commit_comment:    # optional
+    branches:
+      - main
+
+jobs:
+  penetration_testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Install Nettacker
+        run: |
+          pip install nettacker
+      
+      - name: Run Nettacker
+        run: |
+          $ docker-compose up -d && docker exec -it nettacker-nettacker-1 /bin/bash
+      # python nettacker.py -i owasp.org -s -m port_scan
